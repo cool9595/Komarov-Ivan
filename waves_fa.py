@@ -1,19 +1,28 @@
-import sys
-import math
+import sys, math, json, os 
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtGui import QPainter, QPen, QBrush
 from PyQt5.QtCore import Qt, QTimer
 
+# метрики по умолчанию
 WIDTH, HEIGHT, FPS = 1000, 600, 60
-WAVES = [
-    {"amplitude": 50, "wavelength": 200, "speed": 100},
-    {"amplitude": 40, "wavelength": 150, "speed": 100},
-    {"amplitude": 30, "wavelength": 100, "speed": 100},
-    {"amplitude": 60, "wavelength": 300, "speed": 100},
-]
 FLOAT_X, FLOAT_RADIUS = 500, 15
 
+# загрузка начальных состояний 
+FILE = 'waves.json'
+if not os.path.exists(FILE):
+    WAVES = [
+        {"amplitude": 50, "wavelength": 200, "speed": 100},
+        {"amplitude": 40, "wavelength": 150, "speed": 100},
+        {"amplitude": 30, "wavelength": 100, "speed": 100},
+        {"amplitude": 60, "wavelength": 300, "speed": 100},
+    ]
+    with open(FILE, 'w') as f:
+        json.dump({"waves": WAVES}, f)
+else:
+    with open(FILE, 'r') as f:
+        WAVES = json.load(f)["waves"]
 
+# мейн код 
 class WaveWidget(QWidget):
     def __init__(self):
         super().__init__()
@@ -51,4 +60,5 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     w = WaveWidget()
     w.show()
+
     sys.exit(app.exec_())
