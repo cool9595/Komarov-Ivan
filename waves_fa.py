@@ -45,7 +45,7 @@ class WaveWidget(QWidget):
             qp.setPen(QPen(Qt.red, 2))
             prev_x, prev_y = 0, base_y
             for x in range(0, WIDTH, 4):
-                y = base_y + A * math.sin(k * x - omega * self.time) # считаем где будет волна по y на опред x
+                y = base_y + A * math.sin(k * x - omega * self.time) # считаем где будет волна по y на опред x исп угловую частоту
                 qp.drawLine(prev_x, prev_y, x, int(y))
                 prev_x, prev_y = x, int(y)
 
@@ -62,3 +62,4 @@ if __name__ == "__main__":
     w.show()
 
     sys.exit(app.exec_())
+
