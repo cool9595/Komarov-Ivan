@@ -56,10 +56,10 @@ class WaveWidget(QWidget):
         self.time += 1 / FPS
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    w = WaveWidget()
-    w.show()
+app = QApplication(sys.argv)
+w = WaveWidget()
+w.show()
 
-    sys.exit(app.exec_())
+sys.exit(app.exec_())
+
 
